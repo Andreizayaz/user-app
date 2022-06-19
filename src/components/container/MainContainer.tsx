@@ -7,7 +7,10 @@ type MainPropsType = {
 };
 
 const MainContainer: FC<MainPropsType> = ({ children }): ReactElement => (
-  <div className='main-container'>{children}</div>
+  <div className='main-container'>
+    <button className='main-container__burger'></button>
+    {children}
+  </div>
 );
 
 export default MainContainer;

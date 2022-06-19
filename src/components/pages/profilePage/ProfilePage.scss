@@ -2,26 +2,75 @@
   padding: 30px;
 
   &__container {
+    position: relative;
     display: flex;
     justify-content: space-between;
+
+    @media (max-width: 600px) {
+      flex-direction: column;
+    }
   }
 
   &__user {
+    position: relative;
     width: 35%;
-  }
-}
 
-.user {
-  &__posts {
-    width: 60%;
+    @media (max-width: 600px) {
+      width: 100%;
+    }
   }
 
-  &__name {
-    border-bottom: 2px solid;
-  }
+  .user {
+    &__btn {
+      display: none;
+      margin: 0 auto;
+      margin-top: 10px;
 
-  &__contacts {
-    margin: 20px 0;
+      @media (max-width: 600px) {
+        display: block;
+      }
+    }
+
+    &__inner-container {
+      position: relative;
+    }
+
+    &__contacts-and-company {
+      @media (max-width: 600px) {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        display: none;
+        padding: 20px;
+        width: 100%;
+        background-color: #fffff6;
+        border: 2px solid;
+        border-radius: 10px;
+      }
+    }
+
+    &__posts {
+      width: 60%;
+
+      @media (max-width: 600px) {
+        width: 100%;
+      }
+    }
+
+    &__name {
+      h2 {
+        border-bottom: 2px solid;
+
+        @media (max-width: 600px) {
+          text-align: center;
+        }
+      }
+    }
+
+    &__contacts {
+      margin: 20px 0;
+    }
   }
 }
 
@@ -91,6 +140,10 @@
     line-height: 1.5;
     text-indent: 20px;
     word-break: break-all;
+  }
+
+  @media (max-width: 1200px) {
+    width: 100%;
   }
 }
 
