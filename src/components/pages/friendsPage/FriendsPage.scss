@@ -29,9 +29,7 @@
     text-align: center;
   }
 
-  
-
-  &__link{
+  &__link {
     display: flex;
     height: 100%;
     width: 100%;
@@ -40,8 +38,8 @@
     padding: 20px;
     transition: all 1s;
 
-    &:hover{
-        background-color: #F8FF7C;
+    &:hover {
+      background-color: #f8ff7c;
     }
   }
 }
