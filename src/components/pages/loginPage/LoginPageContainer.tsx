@@ -1,8 +1,10 @@
 import { ChangeEvent, FC, FormEvent, ReactElement, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 import { selectErrorMessage, setAuth, setErrorMessage } from 'src/store/Auth';
 
-import { USER_NAME, USER_PASSWORD } from 'src/constants';
+import { PROFILE_LINK, USER_NAME, USER_PASSWORD } from 'src/constants';
 
 import LoginPage from './LoginPage';
 
@@ -11,6 +13,7 @@ const LoginPageContainer: FC = (): ReactElement => {
   const dispatch = useDispatch();
   const [userName, setUserName] = useState('');
   const [userPassword, setUserPassword] = useState('');
+  const navigate = useNavigate();
 
   const inputHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -29,6 +32,7 @@ const LoginPageContainer: FC = (): ReactElement => {
     if (userName === USER_NAME && userPassword === USER_PASSWORD) {
       dispatch(setAuth(true));
       dispatch(setErrorMessage(null));
+      navigate(PROFILE_LINK);
       return;
     }
 

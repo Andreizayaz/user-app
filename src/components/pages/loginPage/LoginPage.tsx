@@ -35,7 +35,7 @@ const LoginPage: FC<LoginPagePropsType> = ({
             name='userpassword'
             onChange={(e) => inputHandler(e)}
           />
-          {errorMessage && <p>{errorMessage}</p>}
+          {errorMessage && <p className='error-text'>{errorMessage}</p>}
           <button className='form__btn'>Log In</button>
         </form>
       </div>
