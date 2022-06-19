@@ -1,0 +1,99 @@
+.profile {
+  padding: 30px;
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__user {
+    width: 35%;
+  }
+}
+
+.user {
+  &__posts {
+    width: 60%;
+  }
+
+  &__name {
+    border-bottom: 2px solid;
+  }
+
+  &__contacts {
+    margin: 20px 0;
+  }
+}
+
+.contacts {
+  &__header {
+    margin-bottom: 15px;
+  }
+
+  &__heading {
+    margin-bottom: 2px;
+    font-weight: 700;
+  }
+
+  &__group {
+    margin-bottom: 5px;
+  }
+}
+
+.company {
+  &__header {
+    margin-bottom: 15px;
+  }
+
+  &__heading {
+    margin-bottom: 2px;
+    font-weight: 700;
+  }
+
+  &__group {
+    margin-bottom: 5px;
+  }
+}
+
+.posts {
+  &__heading {
+    margin-bottom: 10px;
+  }
+  
+  &__posts-list {
+    flex-flow: row wrap;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+}
+
+.posts-list {
+  &__item {
+    width: 48%;
+    background: white;
+    padding: 20px;
+    border: 2px solid;
+    border-radius: 10px;
+  }
+}
+
+.list-item {
+  &__title {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+
+  &__body {
+    text-align: justify;
+    line-height: 1.5;
+    text-indent: 20px;
+    word-break: break-all;
+  }
+}
+
+.post-number {
+  margin-bottom: 10px;
+}

@@ -1,8 +1,21 @@
 import { FC, ReactElement } from 'react';
-import './App.scss';
+import { BrowserRouter } from 'react-router-dom';
+
+import { Header, AppRouter, MainContainer, Footer, Aside } from './components';
 
 const App: FC = (): ReactElement => {
-  return <div className='app'>User Social App</div>;
+  return (
+    <BrowserRouter>
+      <>
+        <Header />
+        <MainContainer>
+          <AppRouter />
+          <Aside />
+        </MainContainer>
+        <Footer />
+      </>
+    </BrowserRouter>
+  );
 };
 
 export default App;

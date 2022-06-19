@@ -1,0 +1,45 @@
+.header {
+  padding: 20px 0;
+  background-color: cornflowerblue;
+
+  &__logo {
+    margin-right: auto;
+    height: 50px;
+    width: 50px;
+    background-image: url('logo.png');
+    background-size: cover;
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.links-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__link-item {
+    padding: 10px;
+  }
+}
+
+.link-item {
+  &__link {
+    font-size: 30px;
+    font-weight: 700;
+    transition: all 1s;
+
+    &:hover {
+      color: #FFB950;
+    }
+  }
+}
+
+.active {
+  color: #FFA05C;
+  border-bottom: 5px solid #FFA05C;
+}

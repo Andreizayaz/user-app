@@ -1,0 +1,16 @@
+.footer {
+  padding: 20px 0;
+  background-color: cornflowerblue;
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__info {
+    font-size: 30px;
+    font-weight: 700;
+    transition: all 1s;
+  }
+}
