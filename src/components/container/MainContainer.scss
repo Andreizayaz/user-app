@@ -1,0 +1,31 @@
+.main-container {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex: 1 1 auto;
+  margin: 0 auto;
+  width: 80%;
+
+  @media (max-width: 1200px) {
+    width: 90%;
+  }
+
+  @media (max-width: 1000px) {
+    width: 100%;
+  }
+
+  &__burger {
+    display: none;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 3;
+    height: 30px;
+    width: 30px;
+    background: antiquewhite;
+
+    @media (max-width: 900px) {
+      display: block;
+    }
+  }
+}
