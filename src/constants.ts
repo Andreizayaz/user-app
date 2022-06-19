@@ -9,3 +9,6 @@ export const LOGIN = 'login';
 export const PROFILE = 'profile';
 export const FRIENDS = 'friends';
 export const NEWS = 'news';
+
+export const USER_NAME = 'Admin';
+export const USER_PASSWORD = '12345';

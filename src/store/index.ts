@@ -1,44 +1,9 @@
-import createSagaMiddleware from 'redux-saga';
 import { configureStore } from '@reduxjs/toolkit';
-import {
-  persistStore,
-  persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER
-} from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import { rootReducer } from './rootReducer';
 
-import rootReducer from './rootReducer';
-import rootSaga from './rootSaga';
-
-const sagaMiddleware = createSagaMiddleware();
-
-const persistConfig = {
-  key: 'root',
-  storage
-};
-
-// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-const store = configureStore({
-  reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
-      }
-    }).concat(sagaMiddleware)
+export const store = configureStore({
+  reducer: rootReducer
 });
 
-sagaMiddleware.run(rootSaga);
-
-export type RootStateType = ReturnType<typeof rootReducer>;
+export type RootStateType = ReturnType<typeof store.getState>;
 export type StoreType = typeof store;
-
-export const persistor = persistStore(store);
-export default store;
