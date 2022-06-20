@@ -5,12 +5,18 @@ import './LoginPage.scss';
 
 type LoginPagePropsType = {
   errorMessage: string | null;
+  nameField: string;
+  passwordField: string;
+  isVisibleError: boolean;
   inputHandler: (event: ChangeEvent<HTMLInputElement>) => void;
   loginHandler: (event: FormEvent<HTMLFormElement>) => void;
 };
 
 const LoginPage: FC<LoginPagePropsType> = ({
   errorMessage,
+  isVisibleError,
+  nameField,
+  passwordField,
   inputHandler,
   loginHandler
 }): ReactElement => (
@@ -25,17 +31,17 @@ const LoginPage: FC<LoginPagePropsType> = ({
             className='form__input'
             type='text'
             placeholder='Enter Login'
-            name='username'
+            name={nameField}
             onChange={(e) => inputHandler(e)}
           />
           <input
             className='form__input'
             type='password'
             placeholder='Enter Password'
-            name='userpassword'
+            name={passwordField}
             onChange={(e) => inputHandler(e)}
           />
-          {errorMessage && <p className='error-text'>{errorMessage}</p>}
+          {isVisibleError && <p className='error-text'>{errorMessage}</p>}
           <button className='form__btn'>Log In</button>
         </form>
       </div>

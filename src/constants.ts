@@ -12,3 +12,6 @@ export const NEWS = 'news';
 
 export const USER_NAME = 'Admin';
 export const USER_PASSWORD = '12345';
+
+export const USER_NAME_FIELD = 'username';
+export const USER_PASSWORD_FIELD = 'userpassword';
