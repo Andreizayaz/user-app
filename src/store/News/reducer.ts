@@ -7,7 +7,7 @@ type initialStateType = {
 };
 
 const initialState: initialStateType = {
-  news: [{ id: 0, title: '', body: '' }]
+  news: [{ userId: 0, id: 0, title: '', body: '' }]
 };
 
 const slice = createSlice({

@@ -1,8 +1,16 @@
-import { ChangeEvent, FC, FormEvent, ReactElement, useState } from 'react';
+import {
+  ChangeEvent,
+  FC,
+  FormEvent,
+  ReactElement,
+  useEffect,
+  useState
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { selectErrorMessage, setAuth, setErrorMessage } from 'src/store/Auth';
+import { userType } from 'src/store/Friends';
 
 import {
   PROFILE_LINK,
@@ -13,14 +21,20 @@ import {
 } from 'src/constants';
 
 import LoginPage from './LoginPage';
+import { fetchCurrentUser, selectCurrentUser } from 'src/store/CurrentUser';
 
 const LoginPageContainer: FC = (): ReactElement => {
   const errorMessage = useSelector(selectErrorMessage);
+  const currentUser: userType = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
   const [userName, setUserName] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [isVisibleError, setIsVisibleError] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(fetchCurrentUser());
+  }, []);
 
   const inputHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -40,7 +54,7 @@ const LoginPageContainer: FC = (): ReactElement => {
     if (userName === USER_NAME && userPassword === USER_PASSWORD) {
       dispatch(setAuth(true));
       dispatch(setErrorMessage(null));
-      navigate(PROFILE_LINK);
+      navigate(PROFILE_LINK, { state: currentUser });
       return;
     }
 

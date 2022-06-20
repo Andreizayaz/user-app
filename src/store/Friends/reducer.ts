@@ -6,7 +6,28 @@ type initialStateType = {
   friends: userType[];
 };
 
-const initialState: initialStateType = { friends: [{ name: '' }] };
+const initialState: initialStateType = {
+  friends: [
+    {
+      id: 0,
+      name: '',
+      email: '',
+      address: {
+        street: '',
+        suite: '',
+        city: '',
+        zipcode: ''
+      },
+      phone: '',
+      website: '',
+      company: {
+        name: '',
+        catchPhrase: '',
+        bs: ''
+      }
+    }
+  ]
+};
 
 const slice = createSlice({
   name: 'friends',

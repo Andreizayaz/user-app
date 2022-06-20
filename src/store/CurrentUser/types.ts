@@ -1,4 +1,4 @@
-export type userType = {
+export type currentUserType = {
   id: number;
   name: string;
   email: string;
@@ -6,6 +6,7 @@ export type userType = {
   phone: string;
   website: string;
   company: companyType;
+  userPosts: postsType[];
 };
 
 type addressType = {
@@ -19,4 +20,11 @@ type companyType = {
   name: string;
   catchPhrase: string;
   bs: string;
+};
+
+type postsType = {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
 };
