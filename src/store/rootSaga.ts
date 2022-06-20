@@ -1,7 +1,8 @@
 import { all } from 'redux-saga/effects';
 
 import { friendsSaga } from './Friends';
+import { newsSaga } from './News';
 
 export default function* rootSaga(): Generator {
-  yield all([friendsSaga()]);
+  yield all([friendsSaga(), newsSaga()]);
 }
