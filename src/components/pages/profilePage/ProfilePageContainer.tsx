@@ -6,6 +6,7 @@ import { LOGIN_LINK } from 'src/constants';
 import { selectAuth } from 'src/store/Auth';
 import { selectCurrentUser } from 'src/store/CurrentUser';
 import { userType } from 'src/store/Friends';
+import { selectIsLoading } from 'src/store/Loading';
 import { selectNews } from 'src/store/News';
 
 import ProfilePage from './ProfilePage';
@@ -15,6 +16,7 @@ const ProfilePageContainer: FC = (): ReactElement => {
   const userData = location.state as userType;
   const posts = useSelector(selectNews);
   const isAuth = useSelector(selectAuth);
+  const isLoading = useSelector(selectIsLoading);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,7 +33,13 @@ const ProfilePageContainer: FC = (): ReactElement => {
 
   userData;
 
-  return <ProfilePage userData={currentUser} posts={currentUserPosts} />;
+  return (
+    <ProfilePage
+      userData={currentUser}
+      posts={currentUserPosts}
+      isLoading={isLoading}
+    />
+  );
 };
 
 export default ProfilePageContainer;

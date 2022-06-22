@@ -5,9 +5,12 @@ import { userType } from 'src/store/Friends';
 
 import { setCurrentUser, fetchCurrentUser } from './reducer';
 
+import { setIsloading } from '../Loading';
+
 import { getCurrentUserData, getCurrentUserPosts } from '../api';
 
 function* fetchCurrentUserData() {
+  yield put(setIsloading(true));
   const currentUserData: userType[] = yield call(getCurrentUserData);
   const currentUserPosts: newsType[] = yield call(getCurrentUserPosts);
 
@@ -27,6 +30,8 @@ function* fetchCurrentUserData() {
       userPosts: currentUserPosts
     })
   );
+
+  yield put(setIsloading(false));
 }
 
 export function* currentUserSage(): Generator {
