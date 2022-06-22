@@ -28,7 +28,7 @@ const ProfilePageContainer: FC = (): ReactElement => {
       ? dispatch(fetchCurrentUser(userData.id))
       : dispatch(fetchCurrentUser(1));
   }, []);
-  const currentUserPosts = useSelector(selectCurrentUser).userPosts;
+  const currentUserPosts = useSelector(selectCurrentUser)?.userPosts;
 
   return (
     <ProfilePage

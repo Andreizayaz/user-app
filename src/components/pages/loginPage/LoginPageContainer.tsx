@@ -36,7 +36,7 @@ const LoginPageContainer: FC = (): ReactElement => {
   const errorMessage = useSelector(selectErrorMessage);
   const isLoading = useSelector(selectIsLoading);
   const isAuth = useSelector(selectAuth);
-  const currentUser: userType = useSelector(selectCurrentUser);
+  const currentUser: userType | null = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
