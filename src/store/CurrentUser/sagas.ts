@@ -8,14 +8,26 @@ import { setCurrentUser, fetchCurrentUser } from './reducer';
 import { setIsloading } from '../Loading';
 
 import { getCurrentUserData, getCurrentUserPosts } from '../api';
+import { ActionType } from './types';
 
-function* fetchCurrentUserData() {
+function* fetchCurrentUserData(fetchCurrentUser: ActionType<number>) {
   yield put(setIsloading(true));
-  const currentUserData: userType[] = yield call(getCurrentUserData);
-  const currentUserPosts: newsType[] = yield call(getCurrentUserPosts);
+  const currentUserData: userType[] = yield call(() =>
+    getCurrentUserData(fetchCurrentUser.payload)
+  );
+  const currentUserPosts: newsType[] = yield call(() =>
+    getCurrentUserPosts(fetchCurrentUser.payload)
+  );
 
-  const { id, name, phone, address, email, website, company } =
-    currentUserData[0];
+  const {
+    id,
+    name,
+    phone,
+    address: { city, suite, street, zipcode },
+    email,
+    website,
+    company
+  } = currentUserData[0];
   currentUserData;
 
   yield put(
@@ -23,7 +35,7 @@ function* fetchCurrentUserData() {
       id,
       name,
       phone,
-      address,
+      address: { city, suite, street, zipcode },
       email,
       website,
       company,

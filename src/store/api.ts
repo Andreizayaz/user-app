@@ -14,10 +14,12 @@ export const getFriends = async (): Promise<userType | undefined> => {
   }
 };
 
-export const getCurrentUserData = async (): Promise<userType[] | undefined> => {
+export const getCurrentUserData = async (
+  userId: number
+): Promise<userType[] | undefined> => {
   try {
     const response = await axios.get<userType[]>(
-      `${BASE_FETCH_URL}/users?id=1`
+      `${BASE_FETCH_URL}/users?id=${userId}`
     );
     return response.data;
   } catch (error) {
@@ -34,10 +36,12 @@ export const getNews = async (): Promise<newsType | undefined> => {
   }
 };
 
-export const getCurrentUserPosts = async (): Promise<newsType | undefined> => {
+export const getCurrentUserPosts = async (
+  userId: number
+): Promise<newsType | undefined> => {
   try {
     const response = await axios.get<newsType>(
-      `${BASE_FETCH_URL}/posts?userId=1`
+      `${BASE_FETCH_URL}/posts?userId=${userId}`
     );
     return response.data;
   } catch (error) {

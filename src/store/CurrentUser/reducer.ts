@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { currentUserType } from './types';
 
@@ -8,7 +8,7 @@ type initialStateType = {
 
 const initialState: initialStateType = {
   currentUser: {
-    id: 0,
+    id: 1,
     name: '',
     email: '',
     address: {
@@ -34,13 +34,11 @@ const slice = createSlice({
   reducers: {
     setCurrentUser: (state, action: PayloadAction<currentUserType>) => {
       state.currentUser = action.payload;
-    },
-
-    fetchCurrentUser: (state) => {
-      state.currentUser;
     }
   }
 });
 
-export const { setCurrentUser, fetchCurrentUser } = slice.actions;
+export const fetchCurrentUser = createAction<number>('get/currentUser');
+
+export const { setCurrentUser /* , fetchCurrentUser */ } = slice.actions;
 export const currentUserReducer = slice.reducer;

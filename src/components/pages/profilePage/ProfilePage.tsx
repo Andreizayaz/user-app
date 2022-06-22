@@ -45,7 +45,7 @@ const ProfilePage: FC<ProfilePagePropsType> = ({
                       <p className='contacts__heading'>Address:</p>
                       <p>
                         {Object.values(userData.address)
-                          .map((item) => item)
+                          .map((item) => (item !== 'geo' ? item : ''))
                           .join(', ')}
                       </p>
                     </div>

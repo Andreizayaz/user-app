@@ -11,6 +11,7 @@ import Header from './Header';
 import { ClassesType } from './types';
 import { getLinks } from 'src/helpers';
 import { setIsVisibleLinks } from 'src/store/VisibleLinks';
+//import { setCurrentUser } from 'src/store/CurrentUser';
 
 const HeaderContainer: FC = (): ReactElement => {
   const isAuth = useSelector(selectAuth);
@@ -20,6 +21,7 @@ const HeaderContainer: FC = (): ReactElement => {
   const logoutUser = () => {
     dispatch(setAuth(false));
     dispatch(setUser(null));
+    //dispatch(setCurrentUser(null));
     dispatch(setIsVisibleLinks(false));
     navigate('/');
   };

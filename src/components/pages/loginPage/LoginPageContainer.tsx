@@ -34,9 +34,9 @@ import { selectIsLoading, setIsloading } from 'src/store/Loading';
 
 const LoginPageContainer: FC = (): ReactElement => {
   const errorMessage = useSelector(selectErrorMessage);
-  const currentUser: userType = useSelector(selectCurrentUser);
   const isLoading = useSelector(selectIsLoading);
   const isAuth = useSelector(selectAuth);
+  const currentUser: userType = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
@@ -46,12 +46,11 @@ const LoginPageContainer: FC = (): ReactElement => {
 
   useEffect(() => {
     if (isAuth) {
-      navigate('/');
+      navigate(PROFILE_LINK, { state: currentUser });
       return;
     }
-    dispatch(fetchCurrentUser());
     dispatch(setIsVisibleLinks(true));
-  }, []);
+  });
 
   const inputHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -72,16 +71,19 @@ const LoginPageContainer: FC = (): ReactElement => {
   const loginUser = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(setIsloading(true));
-    if (userName === USER_NAME && userPassword === USER_PASSWORD) {
+    if (userName === USER_NAME && userPassword === USER_PASSWORD && userEmail) {
       dispatch(setAuth(true));
       dispatch(setUser({ userName, userEmail, userPassword }));
       dispatch(setErrorMessage(null));
-      navigate(PROFILE_LINK, { state: currentUser });
+      dispatch(fetchCurrentUser(1));
       dispatch(setIsloading(false));
       return;
     }
 
-    dispatch(setErrorMessage('invalid username or password'));
+    dispatch(
+      setErrorMessage('invalid username or password or email field is empty')
+    );
+    setIsVisibleError(true);
     dispatch(setIsloading(false));
   };
 

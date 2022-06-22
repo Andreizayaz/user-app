@@ -28,3 +28,8 @@ type postsType = {
   title: string;
   body: string;
 };
+
+export type ActionType<T = number> = {
+  type: string;
+  payload: T;
+};
