@@ -2,7 +2,13 @@ import { FC, ReactElement } from 'react';
 
 import './Loader.scss';
 
-const Loader: FC = (): ReactElement => <div className='loader'></div>;
+type LoaderPropsType = {
+  additionalClasses?: string;
+};
+
+const Loader: FC<LoaderPropsType> = ({ additionalClasses }): ReactElement => (
+  <div className={`loader ${additionalClasses || ''}`}></div>
+);
 
 export default Loader;
 Loader.displayName = 'Loader';

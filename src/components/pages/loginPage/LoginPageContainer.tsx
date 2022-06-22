@@ -9,7 +9,13 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { selectErrorMessage, setAuth, setErrorMessage } from 'src/store/Auth';
+import {
+  selectAuth,
+  selectErrorMessage,
+  setAuth,
+  setErrorMessage,
+  setUser
+} from 'src/store/Auth';
 import { userType } from 'src/store/Friends';
 import { fetchCurrentUser, selectCurrentUser } from 'src/store/CurrentUser';
 import { setIsVisibleLinks } from 'src/store/VisibleLinks';
@@ -19,21 +25,30 @@ import {
   USER_NAME,
   USER_PASSWORD,
   USER_NAME_FIELD,
-  USER_PASSWORD_FIELD
+  USER_PASSWORD_FIELD,
+  USER_EMAIL_FIELD
 } from 'src/constants';
 
 import LoginPage from './LoginPage';
+import { selectIsLoading, setIsloading } from 'src/store/Loading';
 
 const LoginPageContainer: FC = (): ReactElement => {
   const errorMessage = useSelector(selectErrorMessage);
   const currentUser: userType = useSelector(selectCurrentUser);
+  const isLoading = useSelector(selectIsLoading);
+  const isAuth = useSelector(selectAuth);
   const dispatch = useDispatch();
   const [userName, setUserName] = useState('');
+  const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [isVisibleError, setIsVisibleError] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (isAuth) {
+      navigate('/');
+      return;
+    }
     dispatch(fetchCurrentUser());
     dispatch(setIsVisibleLinks(true));
   }, []);
@@ -45,6 +60,9 @@ const LoginPageContainer: FC = (): ReactElement => {
       case USER_NAME_FIELD:
         setUserName(value);
         break;
+      case USER_EMAIL_FIELD:
+        setUserEmail(value);
+        break;
       case USER_PASSWORD_FIELD:
         setUserPassword(value);
         break;
@@ -53,23 +71,28 @@ const LoginPageContainer: FC = (): ReactElement => {
 
   const loginUser = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    dispatch(setIsloading(true));
     if (userName === USER_NAME && userPassword === USER_PASSWORD) {
       dispatch(setAuth(true));
+      dispatch(setUser({ userName, userEmail, userPassword }));
       dispatch(setErrorMessage(null));
       navigate(PROFILE_LINK, { state: currentUser });
+      dispatch(setIsloading(false));
       return;
     }
 
     dispatch(setErrorMessage('invalid username or password'));
-    setIsVisibleError(true);
+    dispatch(setIsloading(false));
   };
 
   return (
     <LoginPage
       errorMessage={errorMessage}
       isVisibleError={isVisibleError}
-      nameField={USER_NAME_FIELD}
-      passwordField={USER_PASSWORD_FIELD}
+      userNameField={USER_NAME_FIELD}
+      userEmailField={USER_EMAIL_FIELD}
+      userPasswordField={USER_PASSWORD_FIELD}
+      isLoading={isLoading}
       loginHandler={loginUser}
       inputHandler={inputHandler}
     />

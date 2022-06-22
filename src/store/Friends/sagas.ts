@@ -2,7 +2,7 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 
 import { setIsloading } from '../Loading';
 
-import { fetchUsers, setUser } from './reducer';
+import { fetchUsers, setFriends } from './reducer';
 
 import { userType } from './types';
 
@@ -12,7 +12,7 @@ function* fetchFriendsData() {
   try {
     yield put(setIsloading(true));
     const friends: userType[] = yield call(getFriends);
-    yield put(setUser(friends));
+    yield put(setFriends(friends));
     yield put(setIsloading(false));
   } catch (error) {
     console.log(error);

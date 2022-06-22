@@ -1,23 +1,29 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { errorMessageType } from './types';
+import { errorMessageType, userDataType } from './types';
 
 type initialStateType = {
   isAuth: boolean;
   errorMessage: errorMessageType;
+  userData: userDataType;
 };
 
 const initialState: initialStateType = {
   isAuth: false,
-  errorMessage: null
+  errorMessage: null,
+  userData: null
 };
 
-const slise = createSlice({
+const slice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
     setAuth: (state, action: PayloadAction<boolean>) => {
       state.isAuth = action.payload;
+    },
+
+    setUser: (state, action: PayloadAction<userDataType>) => {
+      state.userData = action.payload;
     },
 
     setErrorMessage: (state, action: PayloadAction<errorMessageType>) => {
@@ -26,6 +32,6 @@ const slise = createSlice({
   }
 });
 
-export const { setAuth, setErrorMessage } = slise.actions;
-const authReducer = slise.reducer;
+export const { setAuth, setUser, setErrorMessage } = slice.actions;
+const authReducer = slice.reducer;
 export default authReducer;

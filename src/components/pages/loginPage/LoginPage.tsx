@@ -1,13 +1,16 @@
 import { ChangeEvent, FC, FormEvent, ReactElement } from 'react';
 import { Helmet } from 'react-helmet';
+import { Loader } from 'src/components/common';
 
 import './LoginPage.scss';
 
 type LoginPagePropsType = {
   errorMessage: string | null;
-  nameField: string;
-  passwordField: string;
+  userNameField: string;
+  userEmailField: string;
+  userPasswordField: string;
   isVisibleError: boolean;
+  isLoading: boolean;
   inputHandler: (event: ChangeEvent<HTMLInputElement>) => void;
   loginHandler: (event: FormEvent<HTMLFormElement>) => void;
 };
@@ -15,8 +18,10 @@ type LoginPagePropsType = {
 const LoginPage: FC<LoginPagePropsType> = ({
   errorMessage,
   isVisibleError,
-  nameField,
-  passwordField,
+  userNameField,
+  userEmailField,
+  userPasswordField,
+  isLoading,
   inputHandler,
   loginHandler
 }): ReactElement => (
@@ -27,22 +32,49 @@ const LoginPage: FC<LoginPagePropsType> = ({
     <main className='login-page'>
       <div className='login-page__login'>
         <form onSubmit={loginHandler} className='login-page__form form'>
-          <input
-            className='form__input'
-            type='text'
-            placeholder='Enter Login'
-            name={nameField}
-            onChange={(e) => inputHandler(e)}
-          />
-          <input
-            className='form__input'
-            type='password'
-            placeholder='Enter Password'
-            name={passwordField}
-            onChange={(e) => inputHandler(e)}
-          />
+          <div className='form__form-group'>
+            <label className='form__from-label' htmlFor='login'>
+              Login:
+            </label>
+            <input
+              id='login'
+              className='form__input'
+              type='text'
+              placeholder='Enter Login'
+              name={userNameField}
+              onChange={(e) => inputHandler(e)}
+            />
+          </div>
+          <div className='form__form-group'>
+            <label className='form__from-label' htmlFor='email'>
+              Email:
+            </label>
+            <input
+              id='email'
+              className='form__input'
+              type='email'
+              placeholder='Enter Email'
+              name={userEmailField}
+              onChange={(e) => inputHandler(e)}
+            />
+          </div>
+          <div className='form__form-group'>
+            <label className='form__from-label' htmlFor='password'>
+              Password:
+            </label>
+            <input
+              id='password'
+              className='form__input'
+              type='password'
+              placeholder='Enter Password'
+              name={userPasswordField}
+              onChange={(e) => inputHandler(e)}
+            />
+          </div>
           {isVisibleError && <p className='error-text'>{errorMessage}</p>}
-          <button className='form__btn'>Log In</button>
+          <button className='form__btn' disabled={isLoading}>
+            {isLoading ? <Loader additionalClasses='small-loader' /> : 'Log In'}
+          </button>
         </form>
       </div>
     </main>

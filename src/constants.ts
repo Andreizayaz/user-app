@@ -14,6 +14,7 @@ export const USER_NAME = 'Admin';
 export const USER_PASSWORD = '12345';
 
 export const USER_NAME_FIELD = 'username';
+export const USER_EMAIL_FIELD = 'useremail';
 export const USER_PASSWORD_FIELD = 'userpassword';
 
 export const BASE_FETCH_URL = 'https://jsonplaceholder.typicode.com';

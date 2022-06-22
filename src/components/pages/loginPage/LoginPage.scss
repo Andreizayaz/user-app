@@ -22,6 +22,18 @@
   color: white;
   font-size: 20px;
 
+  &__form-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__from-label {
+    display: block;
+    padding: 5px;
+    color: #3d0c02;
+    margin-bottom: 10px;
+  }
+
   &__input {
     margin-bottom: 20px;
     padding: 10px;
@@ -38,11 +50,28 @@
     background-color: cornflowerblue;
     border-radius: 10px;
     transition: all 1s;
+    
+    &:disabled {
+      opacity: 0.7;
+    }
 
     &:hover {
       background-color: burlywood;
+
+      &:disabled {
+        background-color: cornflowerblue;
+        cursor: auto;
+      }
     }
+
   }
+}
+
+.small-loader {
+  margin: 0;
+  height: 50px;
+  width: 50px;
+  background-size: cover;
 }
 
 .error-text {

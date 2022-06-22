@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { headerNav, links } from 'src/data';
 
-import { selectAuth, setAuth } from 'src/store/Auth';
+import { selectAuth, setAuth, setUser } from 'src/store/Auth';
 
 import Header from './Header';
 
@@ -19,6 +19,7 @@ const HeaderContainer: FC = (): ReactElement => {
 
   const logoutUser = () => {
     dispatch(setAuth(false));
+    dispatch(setUser(null));
     dispatch(setIsVisibleLinks(false));
     navigate('/');
   };

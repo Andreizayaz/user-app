@@ -33,7 +33,7 @@ const slice = createSlice({
   name: 'friends',
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<userType[]>) => {
+    setFriends: (state, action: PayloadAction<userType[]>) => {
       state.friends = action.payload;
     },
 
@@ -43,5 +43,5 @@ const slice = createSlice({
   }
 });
 
-export const { setUser, fetchUsers } = slice.actions;
+export const { setFriends, fetchUsers } = slice.actions;
 export const friendsReducer = slice.reducer;
