@@ -11,8 +11,7 @@ import './Header.scss';
 
 type HeaderPropsTypes = {
   classes: ClassesType;
-  links: LinkType[];
-  login: string;
+  links: LinkType[] | undefined;
   isAuth: boolean;
   logoutUser: () => void;
 };
@@ -20,7 +19,6 @@ type HeaderPropsTypes = {
 const Header: FC<HeaderPropsTypes> = ({
   classes,
   links,
-  login,
   isAuth,
   logoutUser
 }): ReactElement => {
@@ -33,10 +31,7 @@ const Header: FC<HeaderPropsTypes> = ({
             Log out
           </button>
         ) : (
-          <Navbar
-            classes={classes}
-            links={links.filter((item) => item.linkName === login)}
-          />
+          <Navbar classes={classes} links={links} />
         )}
       </div>
     </header>

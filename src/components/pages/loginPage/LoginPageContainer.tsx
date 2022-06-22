@@ -11,6 +11,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { selectErrorMessage, setAuth, setErrorMessage } from 'src/store/Auth';
 import { userType } from 'src/store/Friends';
+import { fetchCurrentUser, selectCurrentUser } from 'src/store/CurrentUser';
+import { setIsVisibleLinks } from 'src/store/VisibleLinks';
 
 import {
   PROFILE_LINK,
@@ -21,7 +23,6 @@ import {
 } from 'src/constants';
 
 import LoginPage from './LoginPage';
-import { fetchCurrentUser, selectCurrentUser } from 'src/store/CurrentUser';
 
 const LoginPageContainer: FC = (): ReactElement => {
   const errorMessage = useSelector(selectErrorMessage);
@@ -34,6 +35,7 @@ const LoginPageContainer: FC = (): ReactElement => {
 
   useEffect(() => {
     dispatch(fetchCurrentUser());
+    dispatch(setIsVisibleLinks(true));
   }, []);
 
   const inputHandler = (event: ChangeEvent<HTMLInputElement>) => {

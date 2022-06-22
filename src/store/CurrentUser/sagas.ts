@@ -13,7 +13,7 @@ function* fetchCurrentUserData() {
 
   const { id, name, phone, address, email, website, company } =
     currentUserData[0];
-  console.log(currentUserData);
+  currentUserData;
 
   yield put(
     setCurrentUser({

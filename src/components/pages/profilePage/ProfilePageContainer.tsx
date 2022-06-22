@@ -1,7 +1,9 @@
-import { FC, ReactElement } from 'react';
+import { FC, ReactElement, useEffect } from 'react';
 
 import { useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { LOGIN_LINK } from 'src/constants';
+import { selectAuth } from 'src/store/Auth';
 import { selectCurrentUser } from 'src/store/CurrentUser';
 import { userType } from 'src/store/Friends';
 import { selectNews } from 'src/store/News';
@@ -12,6 +14,14 @@ const ProfilePageContainer: FC = (): ReactElement => {
   const location = useLocation();
   const userData = location.state as userType;
   const posts = useSelector(selectNews);
+  const isAuth = useSelector(selectAuth);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isAuth) {
+      navigate(LOGIN_LINK);
+    }
+  }, []);
 
   const currentUser = userData || useSelector(selectCurrentUser);
 
@@ -19,7 +29,7 @@ const ProfilePageContainer: FC = (): ReactElement => {
     ? posts.filter((item) => item.userId === userData.id)
     : useSelector(selectCurrentUser).userPosts;
 
-  console.log(userData);
+  userData;
 
   return <ProfilePage userData={currentUser} posts={currentUserPosts} />;
 };

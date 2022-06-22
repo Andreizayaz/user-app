@@ -2,14 +2,15 @@ import { FC, ReactElement } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { links } from 'src/data';
-import { LOGIN } from 'src/constants';
+import { headerNav, links } from 'src/data';
 
 import { selectAuth, setAuth } from 'src/store/Auth';
 
 import Header from './Header';
 
 import { ClassesType } from './types';
+import { getLinks } from 'src/helpers';
+import { setIsVisibleLinks } from 'src/store/VisibleLinks';
 
 const HeaderContainer: FC = (): ReactElement => {
   const isAuth = useSelector(selectAuth);
@@ -18,6 +19,7 @@ const HeaderContainer: FC = (): ReactElement => {
 
   const logoutUser = () => {
     dispatch(setAuth(false));
+    dispatch(setIsVisibleLinks(false));
     navigate('/');
   };
   const classes: ClassesType = {
@@ -26,11 +28,12 @@ const HeaderContainer: FC = (): ReactElement => {
     linkClasses: 'link-item__link'
   };
 
+  const headerLinks = getLinks(links, headerNav);
+
   return (
     <Header
       classes={classes}
-      links={links}
-      login={LOGIN}
+      links={headerLinks}
       isAuth={isAuth}
       logoutUser={logoutUser}
     />
