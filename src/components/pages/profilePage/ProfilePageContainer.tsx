@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { LOGIN_LINK } from 'src/constants';
 import { selectAuth } from 'src/store/Auth';
 import { fetchCurrentUser, selectCurrentUser } from 'src/store/CurrentUser';
+import { setAlert } from 'src/store/ErrorAlert';
 import { userType } from 'src/store/Friends';
 import { selectIsLoading } from 'src/store/Loading';
 
@@ -32,6 +33,9 @@ const ProfilePageContainer: FC = (): ReactElement => {
     userData
       ? dispatch(fetchCurrentUser(userData.id))
       : dispatch(fetchCurrentUser(1));
+    return () => {
+      dispatch(setAlert({ isVisibleAlert: false, alertMessage: null }));
+    };
   }, []);
   const currentUserPosts = useSelector(selectCurrentUser)?.userPosts;
 

@@ -49,7 +49,13 @@ function* fetchCurrentUserData(fetchCurrentUser: ActionType<number>) {
 
     yield put(setIsloading(false));
   } catch (error: Error | any) {
-    yield put(setAlert({ isVisibleAlert: true, alertMessage: error.text }));
+    yield put(
+      setAlert({
+        isVisibleAlert: true,
+        alertMessage: error.text || 'Network Error'
+      })
+    );
+    yield put(setIsloading(false));
     console.log(error);
   }
 }

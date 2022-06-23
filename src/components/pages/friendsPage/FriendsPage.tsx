@@ -7,7 +7,7 @@ import { userType } from 'src/store/Friends';
 import { Loader } from 'src/components/common';
 
 type FriendsPagePropsType = {
-  friends: userType[];
+  friends: userType[] | null;
   isLoading: boolean;
 };
 
@@ -25,15 +25,17 @@ const FriendsPage: FC<FriendsPagePropsType> = ({
         {isLoading ? (
           <Loader />
         ) : (
-          <ul className='friends__friends-list'>
-            {friends?.map((item) => (
-              <li key={item.name} className='friends-list__item list-item'>
-                <Link to='/profile' className='list-item__link' state={item}>
-                  <h4 className='list-item__title'>{item.name}</h4>
-                </Link>
-              </li>
-            ))}
-          </ul>
+          friends && (
+            <ul className='friends__friends-list'>
+              {friends?.map((item) => (
+                <li key={item.name} className='friends-list__item list-item'>
+                  <Link to='/profile' className='list-item__link' state={item}>
+                    <h4 className='list-item__title'>{item.name}</h4>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )
         )}
       </div>
     </main>

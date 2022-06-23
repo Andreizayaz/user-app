@@ -7,7 +7,7 @@ import { newsType } from 'src/store/News';
 import './NewsPage.scss';
 
 type NewsPagePropsType = {
-  news: newsType[];
+  news: newsType[] | null;
   isLoading: boolean;
 };
 
@@ -22,17 +22,19 @@ const NewsPage: FC<NewsPagePropsType> = ({ news, isLoading }): ReactElement => (
         {isLoading ? (
           <Loader />
         ) : (
-          <ul className='news__news-list'>
-            {news?.map((item) => (
-              <li key={item.id} className='news-list__item list-item'>
-                <h4 className='list-item__title'>
-                  <span className='news-number'>News #{item.id}</span>
-                  <span className='news-title'>{item.title}</span>
-                </h4>
-                <p className='list-item__body'>{item.body}</p>
-              </li>
-            ))}
-          </ul>
+          news && (
+            <ul className='news__news-list'>
+              {news?.map((item) => (
+                <li key={item.id} className='news-list__item list-item'>
+                  <h4 className='list-item__title'>
+                    <span className='news-number'>News #{item.id}</span>
+                    <span className='news-title'>{item.title}</span>
+                  </h4>
+                  <p className='list-item__body'>{item.body}</p>
+                </li>
+              ))}
+            </ul>
+          )
         )}
       </div>
     </main>

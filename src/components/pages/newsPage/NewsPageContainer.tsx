@@ -1,5 +1,6 @@
 import { FC, ReactElement, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { setAlert } from 'src/store/ErrorAlert';
 import { selectIsLoading } from 'src/store/Loading';
 
 import { selectNews, fetchNews } from 'src/store/News';
@@ -13,6 +14,9 @@ const NewsPageContainer: FC = (): ReactElement => {
 
   useEffect(() => {
     dispatch(fetchNews());
+    return () => {
+      dispatch(setAlert({ isVisibleAlert: false, alertMessage: null }));
+    };
   }, []);
   return <NewsPage news={news} isLoading={isLoading} />;
 };

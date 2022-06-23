@@ -3,11 +3,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { newsType } from './types';
 
 type initialStateType = {
-  news: newsType[];
+  news: newsType[] | null;
 };
 
 const initialState: initialStateType = {
-  news: [{ userId: 0, id: 0, title: '', body: '' }]
+  news: null
 };
 
 const slice = createSlice({

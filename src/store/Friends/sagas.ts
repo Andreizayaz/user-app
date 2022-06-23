@@ -16,7 +16,13 @@ function* fetchFriendsData() {
     friends && (yield put(setFriends(friends)));
     yield put(setIsloading(false));
   } catch (error: Error | any) {
-    yield put(setAlert({ isVisibleAlert: true, alertMessage: error.text }));
+    yield put(
+      setAlert({
+        isVisibleAlert: true,
+        alertMessage: error.text || 'Network Error'
+      })
+    );
+    yield put(setIsloading(false));
     console.log(error);
   }
 }

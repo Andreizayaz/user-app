@@ -16,7 +16,13 @@ function* fetchNewsData() {
     news && (yield put(setNews(news)));
     yield put(setIsloading(false));
   } catch (error: Error | any) {
-    yield put(setAlert({ isVisibleAlert: true, alertMessage: error.text }));
+    yield put(
+      setAlert({
+        isVisibleAlert: true,
+        alertMessage: error.text || 'Network error'
+      })
+    );
+    yield put(setIsloading(false));
     console.log(error);
   }
 }

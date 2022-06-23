@@ -3,30 +3,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { userType } from './types';
 
 type initialStateType = {
-  friends: userType[];
+  friends: userType[] | null;
 };
 
 const initialState: initialStateType = {
-  friends: [
-    {
-      id: 0,
-      name: '',
-      email: '',
-      address: {
-        street: '',
-        suite: '',
-        city: '',
-        zipcode: ''
-      },
-      phone: '',
-      website: '',
-      company: {
-        name: '',
-        catchPhrase: '',
-        bs: ''
-      }
-    }
-  ]
+  friends: null
 };
 
 const slice = createSlice({
