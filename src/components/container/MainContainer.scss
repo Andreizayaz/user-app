@@ -27,11 +27,11 @@
 
     @media (max-width: 900px) {
       display: block;
-      transition: all .5s;
+      transition: all 0.5s;
     }
   }
 }
 
-.btn-rotate{
+.btn-rotate {
   transform: rotate(-90deg);
 }
