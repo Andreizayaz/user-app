@@ -22,10 +22,16 @@
     z-index: 3;
     height: 30px;
     width: 30px;
-    background: antiquewhite;
+    background-image: url('burgerMenuIcon.svg');
+    background-size: cover;
 
     @media (max-width: 900px) {
       display: block;
+      transition: all .5s;
     }
   }
+}
+
+.btn-rotate{
+  transform: rotate(-90deg);
 }

@@ -1,4 +1,4 @@
-import { FC, ReactElement, useEffect } from 'react';
+import { FC, ReactElement, useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -11,6 +11,7 @@ import { selectIsLoading } from 'src/store/Loading';
 import ProfilePage from './ProfilePage';
 
 const ProfilePageContainer: FC = (): ReactElement => {
+  const [isShowUserContacts, setIsShowUserContacts] = useState(false);
   const location = useLocation();
   const currentUser = useSelector(selectCurrentUser);
   const userData = location.state as userType;
@@ -18,6 +19,10 @@ const ProfilePageContainer: FC = (): ReactElement => {
   const isAuth = useSelector(selectAuth);
   const isLoading = useSelector(selectIsLoading);
   const navigate = useNavigate();
+
+  const toggleShowUserContacts = () => {
+    setIsShowUserContacts(!isShowUserContacts);
+  };
 
   useEffect(() => {
     if (!isAuth) {
@@ -35,6 +40,8 @@ const ProfilePageContainer: FC = (): ReactElement => {
       userData={currentUser}
       posts={currentUserPosts}
       isLoading={isLoading}
+      handleClick={toggleShowUserContacts}
+      isShowUserContacts={isShowUserContacts}
     />
   );
 };

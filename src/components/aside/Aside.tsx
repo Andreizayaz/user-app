@@ -10,14 +10,19 @@ import './Aside.scss';
 type AsidePropsType = {
   classes: ClassesType;
   availableLinks: LinkType[] | undefined;
+  isVisible: boolean;
 };
 
 const Aside: FC<AsidePropsType> = ({
   classes,
-  availableLinks
+  availableLinks,
+  isVisible
 }): ReactElement => {
   return (
-    <aside className='aside'>
+    <aside
+      className={isVisible ? 'aside aside-visible' : 'aside'}
+      data-name='aside'
+    >
       <Navbar classes={classes} links={availableLinks} />
     </aside>
   );

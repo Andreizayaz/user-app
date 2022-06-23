@@ -33,6 +33,10 @@
 
     &__inner-container {
       position: relative;
+
+      .contacts-visible {
+        display: block;
+      }
     }
 
     &__contacts-and-company {

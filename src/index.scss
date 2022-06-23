@@ -26,12 +26,12 @@ aside {
   @media (max-width: 900px) {
     position: absolute;
     top: 0;
-    left: 0;
+    left: -50%;
     z-index: 2;
-    display: none;
     padding: 30px 0;
     height: 100%;
     width: 50%;
+    transition: all .5s;
   }
 }
 

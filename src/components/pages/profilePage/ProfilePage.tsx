@@ -11,17 +11,23 @@ type ProfilePagePropsType = {
   userData: userType | null;
   posts: newsType[] | undefined;
   isLoading: boolean;
+  handleClick: () => void;
+  isShowUserContacts: boolean;
 };
 
 const ProfilePage: FC<ProfilePagePropsType> = ({
   userData,
   posts,
-  isLoading
+  isLoading,
+  handleClick,
+  isShowUserContacts
 }): ReactElement => {
   return (
     <>
       <Helmet>
-        <title>Profile Page</title>
+        <title>
+          {isLoading ? 'Loading...' : userData?.name || ''} | Profile
+        </title>
       </Helmet>
       <main className='profile'>
         {isLoading ? (
@@ -32,10 +38,18 @@ const ProfilePage: FC<ProfilePagePropsType> = ({
               <div className='profile__user user'>
                 <div className='user__name'>
                   <h2>{userData.name}</h2>
-                  <button className='user__btn'>View User Contacts</button>
+                  <button className='user__btn' onClick={handleClick}>
+                    {isShowUserContacts ? 'Hide' : 'View'} User Contacts
+                  </button>
                 </div>
                 <div className='user__inner-container'>
-                  <div className='user__contacts-and-company'>
+                  <div
+                    className={
+                      isShowUserContacts
+                        ? 'user__contacts-and-company contacts-visible'
+                        : 'user__contacts-and-company'
+                    }
+                  >
                     <div className='user__contacts contacts'>
                       <h3 className='contacts__header'>User Contacts:</h3>
                       <div className='contacts__group'>
