@@ -9,41 +9,49 @@ import { setIsloading } from '../Loading';
 
 import { getCurrentUserData, getCurrentUserPosts } from '../api';
 import { ActionType } from './types';
+import { setAlert } from '../ErrorAlert';
 
 function* fetchCurrentUserData(fetchCurrentUser: ActionType<number>) {
-  yield put(setIsloading(true));
-  const currentUserData: userType[] = yield call(() =>
-    getCurrentUserData(fetchCurrentUser.payload)
-  );
-  const currentUserPosts: newsType[] = yield call(() =>
-    getCurrentUserPosts(fetchCurrentUser.payload)
-  );
+  try {
+    yield put(setIsloading(true));
+    const currentUserData: userType[] = yield call(() =>
+      getCurrentUserData(fetchCurrentUser.payload)
+    );
+    const currentUserPosts: newsType[] = yield call(() =>
+      getCurrentUserPosts(fetchCurrentUser.payload)
+    );
 
-  const {
-    id,
-    name,
-    phone,
-    address: { city, suite, street, zipcode },
-    email,
-    website,
-    company
-  } = currentUserData[0];
-  currentUserData;
-
-  yield put(
-    setCurrentUser({
+    const {
       id,
       name,
       phone,
       address: { city, suite, street, zipcode },
       email,
       website,
-      company,
-      userPosts: currentUserPosts
-    })
-  );
+      company
+    } = currentUserData[0];
+    currentUserData;
 
-  yield put(setIsloading(false));
+    currentUserPosts &&
+      currentUserPosts &&
+      (yield put(
+        setCurrentUser({
+          id,
+          name,
+          phone,
+          address: { city, suite, street, zipcode },
+          email,
+          website,
+          company,
+          userPosts: currentUserPosts
+        })
+      ));
+
+    yield put(setIsloading(false));
+  } catch (error: Error | any) {
+    yield put(setAlert({ isVisibleAlert: true, alertMessage: error.text }));
+    console.log(error);
+  }
 }
 
 export function* currentUserSage(): Generator {

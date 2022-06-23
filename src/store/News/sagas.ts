@@ -7,14 +7,16 @@ import { getNews } from '../api';
 import { setIsloading } from '../Loading';
 
 import { setNews, fetchNews } from './reducer';
+import { setAlert } from '../ErrorAlert';
 
 function* fetchNewsData() {
   try {
     yield put(setIsloading(true));
     const news: newsType[] = yield call(getNews);
-    yield put(setNews(news));
+    news && (yield put(setNews(news)));
     yield put(setIsloading(false));
-  } catch (error) {
+  } catch (error: Error | any) {
+    yield put(setAlert({ isVisibleAlert: true, alertMessage: error.text }));
     console.log(error);
   }
 }

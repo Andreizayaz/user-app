@@ -7,14 +7,16 @@ import { fetchUsers, setFriends } from './reducer';
 import { userType } from './types';
 
 import { getFriends } from '../api';
+import { setAlert } from '../ErrorAlert';
 
 function* fetchFriendsData() {
   try {
     yield put(setIsloading(true));
     const friends: userType[] = yield call(getFriends);
-    yield put(setFriends(friends));
+    friends && (yield put(setFriends(friends)));
     yield put(setIsloading(false));
-  } catch (error) {
+  } catch (error: Error | any) {
+    yield put(setAlert({ isVisibleAlert: true, alertMessage: error.text }));
     console.log(error);
   }
 }

@@ -23,7 +23,7 @@ const NewsPage: FC<NewsPagePropsType> = ({ news, isLoading }): ReactElement => (
           <Loader />
         ) : (
           <ul className='news__news-list'>
-            {news.map((item) => (
+            {news?.map((item) => (
               <li key={item.id} className='news-list__item list-item'>
                 <h4 className='list-item__title'>
                   <span className='news-number'>News #{item.id}</span>

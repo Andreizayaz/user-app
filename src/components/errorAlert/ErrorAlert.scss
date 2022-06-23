@@ -1,0 +1,50 @@
+.error-message {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  z-index: 2;
+  transform: translateX(-50%);
+  background-color: lightyellow;
+  border-radius: 10px;
+  width: 600px;
+
+  @media (max-width: 600px) {
+    width: 400px;
+  }
+
+  @media (max-width: 320px) {
+    width: 300px;
+  }
+
+  &__content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+}
+
+.content {
+  &__text {
+    color: red;
+    opacity: 0.7;
+    font-size: 22px;
+    padding: 10px 30px;
+  }
+
+  &__close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: 20px;
+    width: 20px;
+    background-image: url('close_icon.png');
+    background-size: cover;
+    transition: all 1s;
+
+    &:hover {
+      transform: rotate(360deg);
+    }
+  }
+}

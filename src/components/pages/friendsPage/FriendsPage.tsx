@@ -26,7 +26,7 @@ const FriendsPage: FC<FriendsPagePropsType> = ({
           <Loader />
         ) : (
           <ul className='friends__friends-list'>
-            {friends.map((item) => (
+            {friends?.map((item) => (
               <li key={item.name} className='friends-list__item list-item'>
                 <Link to='/profile' className='list-item__link' state={item}>
                   <h4 className='list-item__title'>{item.name}</h4>

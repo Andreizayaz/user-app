@@ -5,6 +5,7 @@ import { newsReducer } from './News';
 import { currentUserReducer } from './CurrentUser';
 import { visibleLinksReducer } from './VisibleLinks';
 import { loadingReducer } from './Loading';
+import { alertReducer } from './ErrorAlert';
 
 export const rootReducer = combineReducers({
   auth: authReducer,
@@ -12,5 +13,6 @@ export const rootReducer = combineReducers({
   news: newsReducer,
   currentUser: currentUserReducer,
   visibleLinks: visibleLinksReducer,
-  loading: loadingReducer
+  loading: loadingReducer,
+  errorAlert: alertReducer
 });
