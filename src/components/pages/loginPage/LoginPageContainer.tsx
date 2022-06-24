@@ -30,6 +30,7 @@ import {
 } from 'src/constants';
 
 import LoginPage from './LoginPage';
+import { dataForFormRows } from './data';
 import { selectIsLoading, setIsloading } from 'src/store/Loading';
 
 const LoginPageContainer: FC = (): ReactElement => {
@@ -91,9 +92,7 @@ const LoginPageContainer: FC = (): ReactElement => {
     <LoginPage
       errorMessage={errorMessage}
       isVisibleError={isVisibleError}
-      userNameField={USER_NAME_FIELD}
-      userEmailField={USER_EMAIL_FIELD}
-      userPasswordField={USER_PASSWORD_FIELD}
+      dataForFormRows={dataForFormRows}
       isLoading={isLoading}
       loginHandler={loginUser}
       inputHandler={inputHandler}

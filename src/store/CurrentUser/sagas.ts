@@ -14,7 +14,7 @@ import { setAlert } from '../ErrorAlert';
 function* fetchCurrentUserData(fetchCurrentUser: ActionType<number>) {
   try {
     yield put(setIsloading(true));
-    const currentUserData: userType[] = yield call(() =>
+    const currentUserData: userType = yield call(() =>
       getCurrentUserData(fetchCurrentUser.payload)
     );
     const currentUserPosts: newsType[] = yield call(() =>
@@ -25,11 +25,11 @@ function* fetchCurrentUserData(fetchCurrentUser: ActionType<number>) {
       id,
       name,
       phone,
-      address: { city, suite, street, zipcode },
+      address: { city, suite, street, zipcode, geo },
       email,
       website,
       company
-    } = currentUserData[0];
+    } = currentUserData;
     currentUserData;
 
     currentUserPosts &&
@@ -39,7 +39,7 @@ function* fetchCurrentUserData(fetchCurrentUser: ActionType<number>) {
           id,
           name,
           phone,
-          address: { city, suite, street, zipcode },
+          address: { city, suite, street, zipcode, geo },
           email,
           website,
           company,

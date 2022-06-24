@@ -1,6 +1,6 @@
 import { FC, ReactElement } from 'react';
 import { Helmet } from 'react-helmet';
-import { Loader } from 'src/components/common';
+import { Loader, Card } from 'src/components/common';
 
 import { newsType } from 'src/store/News';
 
@@ -26,11 +26,17 @@ const NewsPage: FC<NewsPagePropsType> = ({ news, isLoading }): ReactElement => (
             <ul className='news__news-list'>
               {news?.map((item) => (
                 <li key={item.id} className='news-list__item list-item'>
-                  <h4 className='list-item__title'>
-                    <span className='news-number'>News #{item.id}</span>
-                    <span className='news-title'>{item.title}</span>
-                  </h4>
-                  <p className='list-item__body'>{item.body}</p>
+                  <Card
+                    card={item}
+                    classes={{
+                      headingClasses: 'list-item__title',
+                      cardNumberClasses: 'news-number',
+                      titleClasses: 'news-title',
+                      bodyClasses: 'list-item__body'
+                    }}
+                    cardNumber={item.id}
+                    cardType='News'
+                  />
                 </li>
               ))}
             </ul>

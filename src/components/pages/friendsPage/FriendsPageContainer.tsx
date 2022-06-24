@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { selectAuth } from 'src/store/Auth';
 import { fetchUsers, selectFriends } from 'src/store/Friends';
 import { selectIsLoading } from 'src/store/Loading';
-import { setAlert } from 'src/store/ErrorAlert';
+import { selectErrorAlert, setAlert } from 'src/store/ErrorAlert';
 
 import { LOGIN_LINK } from 'src/constants';
 
@@ -16,8 +16,8 @@ const FriendsPageContainer: FC = (): ReactElement => {
   const isAuth = useSelector(selectAuth);
   const friends = useSelector(selectFriends);
   const isLoading = useSelector(selectIsLoading);
+  const { isVisibleAlert } = useSelector(selectErrorAlert);
   const navigate = useNavigate();
-  friends;
 
   useEffect(() => {
     if (!isAuth) {
@@ -26,7 +26,8 @@ const FriendsPageContainer: FC = (): ReactElement => {
     }
     dispatch(fetchUsers());
     return () => {
-      dispatch(setAlert({ isVisibleAlert: false, alertMessage: null }));
+      isVisibleAlert &&
+        dispatch(setAlert({ isVisibleAlert: false, alertMessage: null }));
     };
   }, []);
 

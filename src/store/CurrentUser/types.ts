@@ -14,6 +14,12 @@ type addressType = {
   suite: string;
   city: string;
   zipcode: string;
+  geo: geoType;
+};
+
+export type geoType = {
+  lat: string;
+  lng: string;
 };
 
 type companyType = {

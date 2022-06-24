@@ -21,12 +21,13 @@ export const getFriends = async (): Promise<userType | undefined> => {
 
 export const getCurrentUserData = async (
   userId: number
-): Promise<userType[] | undefined> => {
+): Promise<userType | undefined> => {
   try {
     const response = await axios.get<userType[]>(
       `${BASE_FETCH_URL}/users?id=${userId}`
     );
-    return response.data;
+    const [user] = response.data;
+    return user;
   } catch (error: Error | any) {
     store.dispatch(
       setAlert({ isVisibleAlert: true, alertMessage: error.message })

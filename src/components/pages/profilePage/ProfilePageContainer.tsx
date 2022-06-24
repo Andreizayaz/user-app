@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { LOGIN_LINK } from 'src/constants';
 import { selectAuth } from 'src/store/Auth';
 import { fetchCurrentUser, selectCurrentUser } from 'src/store/CurrentUser';
-import { setAlert } from 'src/store/ErrorAlert';
+import { selectErrorAlert, setAlert } from 'src/store/ErrorAlert';
 import { userType } from 'src/store/Friends';
 import { selectIsLoading } from 'src/store/Loading';
 
@@ -19,6 +19,7 @@ const ProfilePageContainer: FC = (): ReactElement => {
   const dispatch = useDispatch();
   const isAuth = useSelector(selectAuth);
   const isLoading = useSelector(selectIsLoading);
+  const { isVisibleAlert } = useSelector(selectErrorAlert);
   const navigate = useNavigate();
 
   const toggleShowUserContacts = () => {
@@ -34,7 +35,8 @@ const ProfilePageContainer: FC = (): ReactElement => {
       ? dispatch(fetchCurrentUser(userData.id))
       : dispatch(fetchCurrentUser(1));
     return () => {
-      dispatch(setAlert({ isVisibleAlert: false, alertMessage: null }));
+      isVisibleAlert &&
+        dispatch(setAlert({ isVisibleAlert: false, alertMessage: null }));
     };
   }, []);
   const currentUserPosts = useSelector(selectCurrentUser)?.userPosts;

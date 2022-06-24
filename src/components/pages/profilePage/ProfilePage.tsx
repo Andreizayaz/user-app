@@ -1,14 +1,16 @@
 import { FC, ReactElement } from 'react';
 import { Helmet } from 'react-helmet';
-import { Loader } from 'src/components/common';
+import { Loader, Card, ContactCard } from 'src/components/common';
 
-import { userType } from 'src/store/Friends';
+import { currentUserType } from 'src/store/CurrentUser';
 import { newsType } from 'src/store/News';
+
+import { getUserContacts, getUserCompanyContacts } from './helpers';
 
 import './ProfilePage.scss';
 
 type ProfilePagePropsType = {
-  userData: userType | null;
+  userData: currentUserType | null;
   posts: newsType[] | undefined;
   isLoading: boolean;
   handleClick: () => void;
@@ -52,47 +54,34 @@ const ProfilePage: FC<ProfilePagePropsType> = ({
                   >
                     <div className='user__contacts contacts'>
                       <h3 className='contacts__header'>User Contacts:</h3>
-                      <div className='contacts__group'>
-                        <p className='contacts__heading'>Email:</p>
-                        <a href='mailto:Sincere@april.biz'>{userData.email}</a>
-                      </div>
-                      <div className='contacts__group'>
-                        <p className='contacts__heading'>Address:</p>
-                        <p>
-                          {Object.values(userData.address)
-                            .map((item) => (item !== 'geo' ? item : ''))
-                            .join(', ')}
-                        </p>
-                      </div>
-                      <div className='contacts__group'>
-                        <p className='contacts__heading'>Phone:</p>
-                        <a href='tel:1-770-736-8031 x56442'>{userData.phone}</a>
-                      </div>
-                      <div className='contacts__group'>
-                        <p className='contacts__heading'>Website:</p>
-                        <a
-                          href='http://hildegard.org'
-                          target='_blank'
-                          rel='noreferrer'
-                        >
-                          {userData.website}
-                        </a>
-                      </div>
+                      {getUserContacts(userData).map((item) => (
+                        <ContactCard
+                          key={item.headingText}
+                          classes={{
+                            divClasses: 'contacts__group',
+                            textClasses: 'contacts__heading'
+                          }}
+                          labelText={item.headingText}
+                          link={{
+                            linkAddress: item.href,
+                            linkText: item.linkText
+                          }}
+                        />
+                      ))}
                     </div>
                     <div className='user__company company'>
                       <h3 className='company__header'>User Company:</h3>
-                      <div className='company__group'>
-                        <p className='company__heading'>Name:</p>
-                        <p>{userData.company.name}</p>
-                      </div>
-                      <div className='company__group'>
-                        <p className='company__heading'>Destination:</p>
-                        <p>{userData.company.catchPhrase}</p>
-                      </div>
-                      <div className='company__group'>
-                        <p className='company__heading'>BS:</p>
-                        <p>{userData.company.bs}</p>
-                      </div>
+                      {getUserCompanyContacts(userData).map((item) => (
+                        <ContactCard
+                          key={item.infoText}
+                          classes={{
+                            divClasses: 'company__group',
+                            textClasses: 'company__heading'
+                          }}
+                          labelText={item.headingText}
+                          infoText={item.infoText}
+                        />
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -103,11 +92,17 @@ const ProfilePage: FC<ProfilePagePropsType> = ({
                   {posts &&
                     posts.map((item, index) => (
                       <li key={item.id} className='posts-list__item list-item'>
-                        <h4 className='list-item__title'>
-                          <span className='post-number'>Post #{index + 1}</span>
-                          <span className='post-title'>{item.title}</span>
-                        </h4>
-                        <p className='list-item__body'>{item.body}</p>
+                        <Card
+                          classes={{
+                            headingClasses: 'list-item__title',
+                            cardNumberClasses: 'post-number',
+                            titleClasses: 'post-title',
+                            bodyClasses: 'list-item__body'
+                          }}
+                          cardType='Post'
+                          cardNumber={index + 1}
+                          card={item}
+                        />
                       </li>
                     ))}
                 </ul>
