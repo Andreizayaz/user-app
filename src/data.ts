@@ -35,3 +35,7 @@ export const links: LinkType[] = [
     linkName: NEWS
   }
 ];
+
+export const headerNav = [LOGIN];
+export const asideNav = [HOME, PROFILE, FRIENDS, NEWS];
+export const unloggedUserNav = [HOME, NEWS];

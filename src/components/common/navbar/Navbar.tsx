@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { LinkType, ClassesType } from './types';
 
 type NavbarPropsType = {
-  links: LinkType[];
+  links: LinkType[] | undefined;
   classes: ClassesType;
 };
 
@@ -14,7 +14,7 @@ const Navbar: FC<NavbarPropsType> = ({
 }): ReactElement => (
   <nav>
     <ul className={listClasses}>
-      {links.map(({ linkName, link }) => (
+      {links?.map(({ linkName, link }) => (
         <li key={linkName} className={listItemClases}>
           <NavLink to={link} className={linkClasses}>
             {linkName}

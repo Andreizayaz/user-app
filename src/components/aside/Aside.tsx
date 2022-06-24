@@ -1,28 +1,29 @@
 import { FC, ReactElement } from 'react';
+import { LinkType } from 'src/types';
 
 import { Navbar } from '../common';
-
-import { links } from '../../data';
-
-import { LOGIN } from 'src/constants';
 
 import { ClassesType } from './types';
 
 import './Aside.scss';
 
-const Aside: FC = (): ReactElement => {
-  const classes: ClassesType = {
-    listClasses: 'links-list',
-    listItemClases: 'links-list__link-item',
-    linkClasses: 'link-item__link'
-  };
+type AsidePropsType = {
+  classes: ClassesType;
+  availableLinks: LinkType[] | undefined;
+  isVisible: boolean;
+};
 
+const Aside: FC<AsidePropsType> = ({
+  classes,
+  availableLinks,
+  isVisible
+}): ReactElement => {
   return (
-    <aside className='aside'>
-      <Navbar
-        classes={classes}
-        links={links.filter((item) => item.linkName !== LOGIN)}
-      />
+    <aside
+      className={isVisible ? 'aside aside-visible' : 'aside'}
+      data-name='aside'
+    >
+      <Navbar classes={classes} links={availableLinks} />
     </aside>
   );
 };
