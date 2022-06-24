@@ -5,7 +5,7 @@ import { Header, AppRouter, MainContainer, Footer, Aside } from './components';
 
 const App: FC = (): ReactElement => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename='/user-app/'>
       <>
         <Header />
         <MainContainer>
